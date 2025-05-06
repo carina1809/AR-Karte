@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/2.0.1/aframe/build/aframe-ar.min.js"></script>
+    <script src="script3.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
+    <title>AR.js mit A-Frame</title>
+   <style>
+      body { margin: 0; overflow: hidden; }
+      #info { position: absolute; top: 10px; left: 10px; background: white; padding: 5px; }
+    </style>
+  </head>
+  <body>
+    <div id="info">
+      <a href="./Marker/pattern-Marker2.patt" download>Marker herunterladen</a>
+    </div>
+
+    <a-scene embedded arjs>
+      <a-marker type="pattern" url="./Marker/pattern-Marker2.patt" id="marker">
+        <!-- Elemente werden dynamisch hinzugefügt -->
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      // Elemente dynamisch zur Szene hinzufügen
+      const marker = document.getElementById('marker');
+      sceneElements.forEach(element => {
+        const el = document.createElement(element.type);
+        Object.entries(element.attributes).forEach(([key, value]) => {
+          el.setAttribute(key, value);
+        });
+        marker.appendChild(el);
+      });
+    </script>
+  </body>
+</html>
